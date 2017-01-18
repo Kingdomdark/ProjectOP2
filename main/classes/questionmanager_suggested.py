@@ -4,6 +4,15 @@ class questionmanager:
     def __init__(self):
         self.categories = []
 
+    # TODO : Add functionality and shit for the questionmanager itself.
+
+
+    #----------------------- DEBUG COMMANDS -------------------------
+    # TODO : Add debug functions to print the lists.
+
+
+
+
 # Category class which contains the questions for each category,
 # Both open questions and multiple choice questions.
 class category:
@@ -26,6 +35,33 @@ class category:
 
     def addmcquestion(self,question,a,b,c,d,answer):
         self.addmcquestion.append(mcquestion(question,a,b,c,d,answer))
+
+
+    #----------------------- DEBUG COMMANDS -------------------------
+    # Print the open questions list in this category with question and answer.
+    def printolist(self):
+        if len(self.oquestions) > 0:
+            print(" \n There are %i questions in '%s'" % (len(self.oquestions), self.name))
+            for q in self.oquestions:
+                print("-----------------------------------------------")
+                print("Q: %s, A: %s" % (q.question, q.answer))
+                print("-----------------------------------------------")
+        else:
+            print("There are no open questions for '%s'.", self.name)
+
+    def printmclist(self):
+        if len(self.mcquestions) > 0:
+            print("\n There are %i questions '%s'" % (len(self.mcquestions), self.name))
+            for q in self.mcquestions:
+                print("-----------------------------------------------")
+                print("Q: %s" % q.question)
+                print("A: %s  B: %s " % (q.a,q.b))
+                print("C: %s  D: %s " % (q.c,q.d))
+                print("Answer: %s" % (q.answer))
+                print("-----------------------------------------------")
+        else:
+            print("There are no multiple choice questions for '%s'." % self.name)
+
 
 
 # Open question class which contains the question and answer
@@ -79,14 +115,10 @@ class mcquestion:
 # Debugging stuff (Don't actually use globals kids, just testing purposes only!!!)
 # Only to test the actual logic!!!!
 c  = category("Random")
-print (c.name)
 c.addoquestion("MAGA?","Yes")
 c.addoquestion("Ayy?","Lmao!")
 c.addoquestion("Dank memes?", "Fast as fuck boi.")
-print("There are %i open questions in the category '%s'." % (len(c.oquestions),c.name))
-for q in c.oquestions:
-    print("-----------------------------------------------")
-    print("Q: %s, A: %s" % (q.question, q.answer))
-    print("-----------------------------------------------")
+c.printolist()
+c.printmclist()
 rq = c.randomoquestion()
 print("Random Q :  Q : %s, A: %s " % (rq.question, rq.answer))
