@@ -1,5 +1,6 @@
 import math
 import pygame
+from  classes.menumanager import menumanager
 
 class Game:
     def __init__(self):
@@ -7,12 +8,15 @@ class Game:
         width = 1000
         height = 700
         size = (width,height)
-
         # Start Pygame
         pygame.init()
 
         # Set the Resolution
         self.screen = pygame.display.set_mode(size)
+
+        # managers
+        self.mm = menumanager(self.screen)
+
         # Set window title
         pygame.display.set_caption("ProjectOP2","ProjectOP2")
 
@@ -25,8 +29,8 @@ class Game:
     # NOTE / TODO : To keep things tidy, create managers for handling
     def draw(self):
         #Clear the screen
-        self.screen.fill((0,0,0))
-
+        self.screen.fill((0 , 0 , 0 ))
+        self.mm.drawbuttons(self)
         #---- BEGIN DRAW LOGIC ----
 
 
