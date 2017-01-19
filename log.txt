@@ -1,3 +1,17 @@
+commit a88f84e10a031745032885be028f3904a1842d3f
+Author: Uxilo <jmolendijk93@gmail.com>
+Date:   Thu Jan 19 13:44:54 2017 +0100
+
+    Removed junkfiles, and hopefully fixed/linked git properly to github
+
+commit 13b985891a20c31710a2b514ce6cac835d191789
+Author: Binh Nguyen <labinhan@hotmail.com>
+Date:   Thu Jan 19 13:32:05 2017 +0100
+
+    Added logs and profiles (??)
+
+    Added log because Uxilo doesnt show up in contributors for proof.
+
 commit 7cb6aed866de01e1d606ecae1d6382a7525dce1d
 Author: StefanDeWitHR <stefan_de_wit@outlook.com>
 Date:   Thu Jan 19 11:41:56 2017 +0100
