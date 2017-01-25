@@ -22,9 +22,9 @@ class menumanager:
 		self.logo = self.sm.getimage("logo")
 		self.menu = self.sm.getimage("background")
 
-		# Instructions popup
+		# Instructions popup > Image need to change
 		self.ipopup = instructionPopup(self.screen,self.sm.getimage("background"),200,200)
-		# highscores popup
+		# highscores popup  Image need to change
 		self.hpopup = highscorePopup(self.screen, self.sm.getimage("quitgame"), 200, 200)
 		# Shortcut for screenblit.
 		self.sb = self.screen.blit
