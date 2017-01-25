@@ -2,6 +2,7 @@
 from .Vector2 import vector2
 from .AudioVisualManager import spritemanager
 from .AudioVisualManager import audiomanager
+from .databasemanager import databasemanager
 import pygame
 
 class menumanager:
@@ -22,9 +23,9 @@ class menumanager:
 		self.menu = self.sm.getimage("background")
 
 		# Instructions popup
-		self.ipopup = instructionPopup(self.screen,self.sm.getimage("instruction_screen")
-,200,200)
-
+		self.ipopup = instructionPopup(self.screen,self.sm.getimage("background"),200,200)
+		# highscores popup
+		self.hpopup = highscorePopup(self.screen, self.sm.getimage("quitgame"), 200, 200)
 		# Shortcut for screenblit.
 		self.sb = self.screen.blit
 
@@ -84,6 +85,7 @@ class menumanager:
 			for k,v in self.buttons.items():
 			 	v.draw()
 			self.ipopup.draw()
+			self.hpopup.draw()
 
 	def update(self):
 		if self.state is not "inactive":
@@ -133,3 +135,29 @@ class instructionPopup:
 		self.screen = screen
 	def draw(self):
 		self.screen.blit(self.img,(self.x,self.y))
+
+
+class highscorePopup:
+	def __init__(self ,screen,img, x , y):
+		self.x = x
+		self.y = y
+		self.img = img
+		self.screen = screen
+		# create connection with database manager
+
+		self.dbm = databasemanager()
+
+		self.font =pygame.font.SysFont("comicsansms",72)
+	def draw(self):
+		results = self.dbm.download_scores()
+		for row in results:
+			score = row[0]
+			fname = row[1]
+
+			self.name = self.font.render(str(fname),True,(0,128,0))
+			self.score = self.font.render(str(score), True, (0, 128, 0))
+
+			self.screen.blit(self.name, (0, 100))
+			self.screen.blit(self.score, (100, 200))
+
+
