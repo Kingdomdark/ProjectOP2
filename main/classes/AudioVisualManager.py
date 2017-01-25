@@ -15,7 +15,8 @@ class spritemanager:
             "instructions_hover" : os.path.join(self.imgfolder,"instructions_hover.png"),
             "quitgame" : os.path.join(self.imgfolder,"quitgame.png"),
             "quitgame_hover" : os.path.join(self.imgfolder,"quitgame_hover.png"),
-            "tile" : os.path.join(self.imgfolder,"tile.png")
+            "tile" : os.path.join(self.imgfolder,"tile.png"),
+            "instruction_screen": os.path.join(self.imgfolder, "instruction_screen.png")
         }
 
     def getimage(self,imgname):

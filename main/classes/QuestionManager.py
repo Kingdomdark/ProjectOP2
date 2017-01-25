@@ -11,8 +11,6 @@ class questionmanager:
         self.categories[0].addoquestion("MAGA?","Ofcourse!")
         self.categories[0].addoquestion("Another one.","You special.")
 
-        self.categories[0].addmcquestion("Mudkipz?","Ayy","Bee","See","Mudkipz!","d")
-
 
 
         self.categories.append(category("Technology"))

@@ -5,14 +5,13 @@ from .AudioVisualManager import audiomanager
 import pygame
 
 class menumanager:
-	def __init__(self,screen,gamemanager):
+	def __init__(self,screen,contentmanager):
 		self.screen = screen
 		# Load image
 		self.limg = pygame.image.load
 		self.sm = spritemanager()
 		self.am = audiomanager()
-		self.gm = gamemanager # Reference to parent used to invoke methods on the parent.
-		print(self.gm)
+		self.cm = contentmanager # Reference to parent used to invoke methods on the parent.
 
 		# Play a shitty song on loop
 		# TODO : Upon progressing to the game, change the music played.
@@ -21,6 +20,10 @@ class menumanager:
 		# Get the images from the spritemanager
 		self.logo = self.sm.getimage("logo")
 		self.menu = self.sm.getimage("background")
+
+		# Instructions popup
+		self.ipopup = instructionPopup(self.screen,self.sm.getimage("instruction_screen")
+,200,200)
 
 		# Shortcut for screenblit.
 		self.sb = self.screen.blit
@@ -35,12 +38,13 @@ class menumanager:
 		self.buttons = {
 			"start" : button(self.screen, 20, 230, self.sm.getimage("start"), self.sm.getimage("start_hover"),"menu"),
 			"instructions" : button(self.screen, 20, 290, self.sm.getimage("instructions"), self.sm.getimage("instructions_hover"),"menu"),
-			"quit" : button(self.screen, 20, 350, self.sm.getimage("quitgame"), self.sm.getimage("quitgame_hover"), "menu")
+			"highscores": button(self.screen, 20, 350, self.sm.getimage("instructions"),self.sm.getimage("instructions_hover"), "menu"),
+			"quit" : button(self.screen, 20, 410, self.sm.getimage("quitgame"), self.sm.getimage("quitgame_hover"), "menu")
 		}
 		# Array used to link functions to the buttons.
 		# Be sure not to include the () when adding the function.
 		self.functions = {
-			"start" : self.testfunction,
+			"start" : self.switchstage,
 			"instructions" : self.testfunction,
 			"quit" : pygame.quit
 		}
@@ -79,6 +83,7 @@ class menumanager:
 			# Draw the buttons (KVP-Loop)
 			for k,v in self.buttons.items():
 			 	v.draw()
+			self.ipopup.draw()
 
 	def update(self):
 		if self.state is not "inactive":
@@ -89,6 +94,9 @@ class menumanager:
 
 	def testfunction(self):
 		print("Testing")
+
+	def switchstage(self):
+		self.cm.stage = 1
 
 
 
@@ -115,3 +123,13 @@ class button:
 
 	def update(self):
 		pass
+
+
+class instructionPopup:
+	def __init__(self ,screen,img, x , y):
+		self.x = x
+		self.y = y
+		self.img = img
+		self.screen = screen
+	def draw(self):
+		self.screen.blit(self.img,(self.x,self.y))
