@@ -176,10 +176,10 @@ class mcquestion:
 # Debugging stuff (Don't actually use globals kids, just testing purposes only!!!)
 # Only to test the actual logic!!!!
 
-
-qm = questionmanager()
-qm.printcats()
-q = qm.getrandomquestionfromcat("SpOrts","o")
-print("Q: %s, A: %s" % (q.question,q.answer))
-qm.categories[0].printolist()
-qm.categories[0].printmclist()
+# 
+# qm = questionmanager()
+# qm.printcats()
+# q = qm.getrandomquestionfromcat("SpOrts","o")
+# print("Q: %s, A: %s" % (q.question,q.answer))
+# qm.categories[0].printolist()
+# qm.categories[0].printmclist()
