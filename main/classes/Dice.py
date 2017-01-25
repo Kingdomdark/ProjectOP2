@@ -21,15 +21,15 @@ class Dice():
 
 
         #Draw the dice on the screen
-        if roll.dice_roll == 1:
+        if Dice.roll() == 1:
             self.screen.blit (eyes1,(350,0))
-        elif roll.dice_roll == 2:
+        elif Dice.roll() == 2:
             self.screen.blit (eyes2,(350,0))
-        elif roll.dice_roll == 3:
+        elif Dice.roll == 3:
             self.screen.blit (eyes3,(350,0))
-        elif roll.dice_roll == 4:
+        elif Dice.roll() == 4:
             self.screen.blit (eyes4,(350,0))
-        elif roll.dice_roll == 5:
+        elif Dice.roll() == 5:
             self.screen.blit (eyes5,(350,0))
-        elif roll.dice_roll == 6:
+        elif Dice.roll() == 6:
             self.screen.blit (eyes6,(350,0))
