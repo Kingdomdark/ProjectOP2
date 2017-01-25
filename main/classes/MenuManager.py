@@ -25,7 +25,7 @@ class menumanager:
 		# Instructions popup > Image need to change
 		self.ipopup = instructionPopup(self.screen,self.sm.getimage("background"),200,200)
 		# highscores popup  Image need to change
-		self.hpopup = highscorePopup(self.screen, self.sm.getimage("quitgame"), 200, 200)
+		self.hpopup = highscorePopup(self.screen, 200, 200)
 		# Shortcut for screenblit.
 		self.sb = self.screen.blit
 
@@ -138,10 +138,9 @@ class instructionPopup:
 
 
 class highscorePopup:
-	def __init__(self ,screen,img, x , y):
+	def __init__(self ,screen, x , y):
 		self.x = x
 		self.y = y
-		self.img = img
 		self.screen = screen
 		# create connection with database manager
 
