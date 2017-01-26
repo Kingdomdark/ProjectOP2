@@ -25,7 +25,7 @@ class menumanager:
 		# Instructions popup > Image need to change
 		self.ipopup = instructionPopup(self.screen,self.sm.getimage("background"),200,200)
 		# highscores popup  Image need to change
-		self.hpopup = highscorePopup(self.screen, 200, 200)
+		self.hpopup =None
 		# Shortcut for screenblit.
 		self.sb = self.screen.blit
 
@@ -39,7 +39,7 @@ class menumanager:
 		self.buttons = {
 			"start" : button(self.screen, 20, 230, self.sm.getimage("start"), self.sm.getimage("start_hover"),"menu"),
 			"instructions" : button(self.screen, 20, 290, self.sm.getimage("instructions"), self.sm.getimage("instructions_hover"),"menu"),
-			"highscores": button(self.screen, 20, 350, self.sm.getimage("instructions"),self.sm.getimage("instructions_hover"), "menu"),
+			"highscores": button(self.screen, 20, 350, self.sm.getimage("highscores"),self.sm.getimage("highscores_hover"), "menu"),
 			"quit" : button(self.screen, 20, 410, self.sm.getimage("quitgame"), self.sm.getimage("quitgame_hover"), "menu")
 		}
 		# Array used to link functions to the buttons.
@@ -47,6 +47,7 @@ class menumanager:
 		self.functions = {
 			"start" : self.switchstage,
 			"instructions" : self.testfunction,
+			"highscores": self.highscorePress,
 			"quit" : pygame.quit
 		}
 
@@ -84,15 +85,17 @@ class menumanager:
 			# Draw the buttons (KVP-Loop)
 			for k,v in self.buttons.items():
 			 	v.draw()
-			self.ipopup.draw()
-			self.hpopup.draw()
+			#self.ipopup.draw()
+			if self.hpopup is not None:
+				self.hpopup.draw()
 
 	def update(self):
 		if self.state is not "inactive":
 			for k,v in self.buttons.items():
 				v.update()
 		
-
+	def highscorePress(self):
+		self.hpopup = highscorePopup(self.screen , 200 , 200)
 
 	def testfunction(self):
 		print("Testing")
@@ -133,8 +136,10 @@ class instructionPopup:
 		self.y = y
 		self.img = img
 		self.screen = screen
+
 	def draw(self):
 		self.screen.blit(self.img,(self.x,self.y))
+
 
 
 class highscorePopup:
@@ -146,17 +151,48 @@ class highscorePopup:
 
 		self.dbm = databasemanager()
 
-		self.font =pygame.font.SysFont("comicsansms",72)
+		#highscores
+		self.font =pygame.font.SysFont("arial",25)
+
+		#title
+		self.title = pygame.font.SysFont("arial", 70)
+
+		self.results = self.dbm.download_top_score()
+		self.hscores = []
+		for i in range(0,len(self.results)):
+			self.hscores.append(hscore(self.results[i][2],int(self.results[i][1]), int(self.results[i][0])))
+
 	def draw(self):
-		results = self.dbm.download_scores()
-		for row in results:
-			score = row[0]
-			fname = row[1]
+		#Highscore title
+		self.highscoreTitle = self.title.render("TOP 5 ", True, (255,255,255))
+		# columns
+		self.columnName = self.font.render("Name", True, (0, 0, 0))
+		self.columnCQ = self.font.render("Correct questions", True, (0, 0, 0))
+		self.columnT = self.font.render("Turns", True, (0, 0, 0))
 
-			self.name = self.font.render(str(fname),True,(0,128,0))
-			self.score = self.font.render(str(score), True, (0, 128, 0))
+		pygame.draw.rect(self.screen, (255,255,255), (0, 200, 600, 400))
 
-			self.screen.blit(self.name, (0, 100))
-			self.screen.blit(self.score, (100, 200))
+		self.screen.blit(self.highscoreTitle, (200, 100))
+		pygame.draw.rect(self.screen, (0, 0, 0), (0, 200, 600, 400) , 1)
+		# drawing columns
+		self.screen.blit(self.columnName, (50, 150))
+		self.screen.blit(self.columnCQ, (200, 150))
+		self.screen.blit(self.columnT, (400, 150))
+		self.spacing = 30
 
 
+		for i in range(0, len(self.hscores)):
+			self.name = self.font.render(str(self.hscores[i].name), True, (0, 0, 0))
+			self.Cquestions = self.font.render(str(self.hscores[i].cquestions), True, (0, 0, 0))
+			self.turns = self.font.render(str(self.hscores[i].turns), True, (0, 0, 0))
+
+			self.screen.blit(self.name, (50, 200 + (self.spacing * i)))
+			self.screen.blit(self.Cquestions, (200, 200 + (self.spacing * i)))
+			self.screen.blit(self.turns, (400, 200 + (self.spacing * i)))
+
+
+class hscore:
+	def __init__(self, name, cquestions, turns):
+		self.name = name
+		self.cquestions = cquestions
+		self.turns = turns
