@@ -11,6 +11,7 @@ class questionmanager:
         #self.categories[0].addoquestion("MAGA?","Ofcourse!")
         #self.categories[0].addoquestion("Another one.","You special.")
          # sport mp questions 10
+        self.categories.append(category("Sport"))
         self.categories[0].addmcquestion(". Hoe lang duurt een professionele voetbalwedstrijd?","120 min","60 min","90 min","140 min","c"),
         self.categories[0].addmcquestion("Bij welke sport horen de termen “strike” en “spare”?","bowlen","hockey","voetbal","tennis","a"),
         self.categories[0].addmcquestion("Hoe heet de Haagse voetbalclub?","Ado kek","FC haag","Ado Den Haag","Cmi boys","c"),
