@@ -7,16 +7,24 @@ class spritemanager:
     def __init__(self):
         self.imgfolder = os.path.join(os.getcwd(),"images")
         self.sprites = {
+
+            # Menu Content
             "background" : os.path.join(self.imgfolder,"background.png"),
             "logo" : os.path.join(self.imgfolder,"logo.png"),
             "start" : os.path.join(self.imgfolder,"start.png"),
             "start_hover" : os.path.join(self.imgfolder,"start_hover.png"),
             "instructions" : os.path.join(self.imgfolder,"instructions.png"),
             "instructions_hover" : os.path.join(self.imgfolder,"instructions_hover.png"),
+            "highscores" : os.path.join(self.imgfolder, "highscores.png"),
+            "highscores_hover" : os.path.join(self.imgfolder, "highscores_hover.png"),
             "quitgame" : os.path.join(self.imgfolder,"quitgame.png"),
             "quitgame_hover" : os.path.join(self.imgfolder,"quitgame_hover.png"),
-            "tile" : os.path.join(self.imgfolder,"tile.png"),
-            "instruction_screen": os.path.join(self.imgfolder, "instruction_screen.png")
+
+            # Game Content
+            "background_game" : os.path.join(self.imgfolder, "background_game.png"),
+            "board1" : os.path.join(self.imgfolder, "board1.png"),
+            "board2" : os.path.join(self.imgfolder, "board2.png"),
+            "tile" : os.path.join(self.imgfolder,"tile.png")
         }
 
     def getimage(self,imgname):
