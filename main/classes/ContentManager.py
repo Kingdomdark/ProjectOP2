@@ -16,6 +16,9 @@ class contentmanager:
     def switchtogame(self):
         self.stage = 1
 
+    def switchtomenu(self):
+        self.stage = 0
+
     def update(self):
         if self.stage == 0:
             self.mm.update()

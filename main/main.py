@@ -23,8 +23,11 @@ class Main:
         # Mouse position
         self.pos = pygame.mouse.get_pos()
 
+        # pass events
+        self.events = pygame.event.get()
+
         # Set window title
-        pygame.display.set_caption("Euromasterdam","ProjectOP2")
+        pygame.display.set_caption("Euromast Game","Euromast Game")
 
     # Update everything
     # NOTE / TODO : To keep things tidy, create managers for handling
@@ -61,20 +64,37 @@ class Main:
     # Handle pygame events
     def process_events(self):
         self.pos = pygame.mouse.get_pos()
-        for event in pygame.event.get():
+        self.events = pygame.event.get()
+        if self.cm.gm.popupo is not None:
+            if not self.cm.gm.paused:
+                self.cm.gm.popupo.answer.update(self.events)
+        if self.cm.gm.endgamepopup is not None:
+            self.cm.gm.endgamepopup.answer.update(self.events)
+        for event in self.events:
             # Quit game
             if event.type == pygame.QUIT:
                 pygame.quit()
 
-            # Mouse hover handling
+            # Main Menu Handling
             if self.cm.stage == 0:
+                # Mouse hover handling
                 self.cm.mm.bhoverhandling(self.pos)
-            # Mouse button down handling
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                #If on menu, check for menu events @ Buttons.
-                #----------- MENU MANAGER ------------
-                if self.cm.stage == 0:
+                # Mouse button down handling
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    #If on menu, check for menu events @ Buttons.
                     self.cm.mm.bclickhandling(self.pos)
+                    if self.cm.mm.ipopup is not None:
+                        self.cm.mm.ipopup.bclickhandling()
+
+            # Game stuff
+            elif self.cm.stage == 1:
+                self.cm.gm.bhoverhandling(self.pos)
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    self.cm.gm.bclickhandling(self.pos)
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.cm.gm.paused = not self.cm.gm.paused
+
 
 
 

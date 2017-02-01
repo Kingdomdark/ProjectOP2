@@ -56,12 +56,12 @@ class databasemanager:
         self.interact_with_database("INSERT INTO highscores (correct_questions , turns_taken , name )  VALUES (  {} , {} , '{}') "
                                     .format( CQuestions , turns , name))
 
-        
+
 
 db = databasemanager()
 
 # create table if not exist
 # db.createTable()
-# db.insertplayer( 20 , 20 , 20 , "stefan")
-# db.insertplayer( 15 , 5 , 15 , "Jordan")
-# db.insertplayer( 7, 3 , 7 , "Binh")
+# db.insertplayer( 20 , 20 , "stefan")
+# db.insertplayer( 5 , 15 , "Jordan")
+# db.insertplayer( 3 , 7 , "Binh")
