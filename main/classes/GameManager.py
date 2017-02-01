@@ -44,16 +44,12 @@ class gamemanager:
         # Player stuff
         self.players = [
             player(self.screen, "Player 1", self.sm.getcolor("orange")),
-            player(self.screen, "Player 2", self.sm.getcolor("blue")),
-            player(self.screen, "Player 3", self.sm.getcolor("red")),
-            player(self.screen, "Player 4", self.sm.getcolor("green"))
+            player(self.screen, "Player 2", self.sm.getcolor("blue"))
         ]
         self.curplayer = self.players[0]
         self.players[0].currenttile = self.tm.gettile(0,4)
         self.players[1].currenttile = self.tm.gettile(0,6)
-        self.players[2].currenttile = self.tm.gettile(1,4)
-        self.players[3].currenttile = self.tm.gettile(1,6)
-        # self.players[2].currenttile = self.tm.gettile(0,16)
+
         print("%s current tile cat = %s. \n position : (%i, %i) " % (self.curplayer.name, self.curplayer.currenttile.category, self.curplayer.currenttile.pos.x, self.curplayer.currenttile.pos.y))
 
         self.menusize = vector2(285, self.screen.get_width())
@@ -155,7 +151,7 @@ class gamemanager:
         self.gm = self
         self.type = None
 
-        self.thrown = 3 #randint(1,6)
+        self.thrown = randint(1,6)
         if self.thrown == 1 or self.thrown == 2:
             self.curplayer.movesleft = 1
         elif self.thrown == 3 or self.thrown == 4:
