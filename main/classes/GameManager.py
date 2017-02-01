@@ -44,11 +44,11 @@ class gamemanager:
         # Player stuff
         self.players = [
             player(self.screen, "Player 1", self.sm.getcolor("orange")),
-            player(self.screen, "Player 2", self.sm.getcolor("blue"))
+            player(self.screen, "Player 2", self.sm.getcolor("blue")),
         ]
         self.curplayer = self.players[0]
-        self.players[0].currenttile = self.tm.gettile(0,4)
-        self.players[1].currenttile = self.tm.gettile(0,6)
+        self.players[0].currenttile = self.tm.gettile(0,5)
+        self.players[1].currenttile = self.tm.gettile(1,5)
 
         print("%s current tile cat = %s. \n position : (%i, %i) " % (self.curplayer.name, self.curplayer.currenttile.category, self.curplayer.currenttile.pos.x, self.curplayer.currenttile.pos.y))
 
@@ -216,7 +216,6 @@ class gamemanager:
             else:
                 self.state = "pickdirection"
                 self.nextplayer()
-
 
 
     def nextplayer(self):
